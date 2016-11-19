@@ -3,22 +3,18 @@ package ir.hri.rest.controller;
 import ir.hri.core.entities.City;
 import ir.hri.core.services.CityService;
 import ir.hri.core.services.impl.CityServiceImpl;
-import ir.hri.rest.utils.ApiV1Urls;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.NotFoundException;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 
-@Path(ApiV1Urls.BaseInfo.BASE_INFO)
+import static ir.hri.rest.utils.ApiV1Urls.BaseInfo.*;
+
+@Path(BASE_INFO)
 public class BaseInfo {
 
     @GET
-    @Path(ApiV1Urls.BaseInfo.CITIES)
+    @Path(PATH_CITIES)
     @Produces(MediaType.APPLICATION_JSON)
     public List<City> cities() {
         CityService cityService = new CityServiceImpl();
@@ -33,10 +29,32 @@ public class BaseInfo {
     }
 
     @GET
-    @Path(ApiV1Urls.BaseInfo.STATES)
+    @Path(PATH_CITY_ID)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<String> states() {
+    public City city(@PathParam(PARAM_ID) int id) {
+        CityService cityService = new CityServiceImpl();
+        City city = null;
+        try {
+            city = cityService.findById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return city;
+    }
 
-        return new ArrayList<>();
+    @GET
+    @Path(PATH_CITIES_STATE_ID)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<City> cities(@PathParam(PARAM_STATE_ID) int stateId) {
+        CityService cityService = new CityServiceImpl();
+        List<City> cityList = null;
+        try {
+            cityList = cityService.findByStateId(stateId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cityList;
     }
 }

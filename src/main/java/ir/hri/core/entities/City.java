@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "CITY")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "cache1")
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "cache1")
 public class City {
     @Id
     @Column(name = "ID")

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "STATE")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "cache1")
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "cache1")
 public class State {
     @Id
     @Column(name = "ID")

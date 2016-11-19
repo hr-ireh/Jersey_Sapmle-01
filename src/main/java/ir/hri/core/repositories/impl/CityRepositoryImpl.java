@@ -9,19 +9,8 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class CityRepositoryImpl implements CityRepository {
-    EntityManager entityManager;
-
-    {
-        try {
-            System.out.println("---ok.");
-            entityManager =
-                    JPAUtility.getEntityManager();
-            System.out.println("---ok.2");
-        } catch (Exception e) {
-            System.out.println("---er: " + e.getMessage());
-        }
-
-    }
+    EntityManager entityManager =
+            JPAUtility.getEntityManager();
 
     @Override
     public City findById(int id) throws Exception {
@@ -33,11 +22,8 @@ public class CityRepositoryImpl implements CityRepository {
 
     @Override
     public List<City> findAll() throws Exception {
-        System.out.println("----------CityRepositoryImpl.findAll");
         Query query = entityManager.createQuery("select t from City t");
         List<City> cityList = query.getResultList();
-
-        System.out.println("----------CityRepositoryImpl.findAll.ok");
         return cityList;
     }
 

@@ -119,7 +119,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.7.5</version>
+            <version>1.7.21</version>
         </dependency>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     </dependencies>
@@ -142,6 +142,17 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/META-INF</directory>
+                <targetPath>META-INF</targetPath>
+            </resource>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/java/ir/hri/resources</directory>
+            </resource>
+        </resources>
     </build>
 
 </project>
