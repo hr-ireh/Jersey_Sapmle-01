@@ -1,8 +1,11 @@
 package ir.hri.rest.controller;
 
 import ir.hri.core.entities.City;
+import ir.hri.core.entities.State;
 import ir.hri.core.services.CityService;
+import ir.hri.core.services.StateService;
 import ir.hri.core.services.impl.CityServiceImpl;
+import ir.hri.core.services.impl.StateServiceImpl;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -56,5 +59,34 @@ public class BaseInfo {
             e.printStackTrace();
         }
         return cityList;
+    }
+
+    @GET
+    @Path(PATH_STATES)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<State> states() {
+        StateService stateService = new StateServiceImpl();
+        List<State> stateList = null;
+        try {
+            stateList = stateService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return stateList;
+    }
+
+    @GET
+    @Path(PATH_STATE_ID)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public State state(@PathParam(PARAM_ID) int id) {
+        StateService stateService = new StateServiceImpl();
+        State state = null;
+        try {
+            state = stateService.findById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return state;
     }
 }

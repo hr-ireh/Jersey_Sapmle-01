@@ -10,5 +10,7 @@
 
 <p><a href="api/v1/baseinfo/states">States.</a></p>
 
+<p><a href="api/v1/baseinfo/state/1">State Id: 1</a></p>
+
 </body>
 </html>
