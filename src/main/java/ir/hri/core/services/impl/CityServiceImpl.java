@@ -2,13 +2,16 @@ package ir.hri.core.services.impl;
 
 import ir.hri.core.entities.City;
 import ir.hri.core.repositories.CityRepository;
-import ir.hri.core.repositories.impl.CityRepositoryImpl;
 import ir.hri.core.services.CityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CityServiceImpl implements CityService {
-    CityRepository cityRepository = new CityRepositoryImpl();
+    @Autowired
+    private CityRepository cityRepository;
 
     @Override
     public City findById(int id) throws Exception {

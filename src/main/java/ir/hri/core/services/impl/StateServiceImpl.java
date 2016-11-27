@@ -2,13 +2,16 @@ package ir.hri.core.services.impl;
 
 import ir.hri.core.entities.State;
 import ir.hri.core.repositories.StateRepository;
-import ir.hri.core.repositories.impl.StateRepositoryImpl;
 import ir.hri.core.services.StateService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class StateServiceImpl implements StateService {
-    StateRepository stateRepository = new StateRepositoryImpl();
+    @Autowired
+    private StateRepository stateRepository;
 
     @Override
     public State findById(int id) throws Exception {
