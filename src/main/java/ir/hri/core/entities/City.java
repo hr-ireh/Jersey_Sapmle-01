@@ -1,10 +1,8 @@
 package ir.hri.core.entities;
 
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.Cache;
-
-import javax.persistence.*;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity

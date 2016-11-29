@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-import static ir.hri.rest.utils.ApiV1Urls.BaseInfo.*;
+import static ir.hri.rest.utils.ApiV1Urls.BaseInfoPath.*;
 
 @Controller
 @Path(BASE_INFO)
@@ -26,7 +26,7 @@ public class BaseInfo {
     @Autowired
     private StateService stateService;
 
-    final static Logger logger = Logger.getLogger(BaseInfo.class.getName());
+    private static final Logger logger = Logger.getLogger(BaseInfo.class);
 
     @GET
     @Path(PATH_CITIES)
@@ -49,6 +49,7 @@ public class BaseInfo {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response city(@PathParam(PARAM_ID) int id) {
+        logger.info("Call city");
         City city = null;
         try {
             city = cityService.findById(id);
@@ -64,6 +65,7 @@ public class BaseInfo {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response cities(@PathParam(PARAM_STATE_ID) int stateId) {
+        logger.info("Call cities");
         List<City> cityList = null;
         try {
             cityList = cityService.findByStateId(stateId);
@@ -78,6 +80,7 @@ public class BaseInfo {
     @Path(PATH_STATES)
     @Produces(MediaType.APPLICATION_JSON)
     public Response states() {
+        logger.info("Call states");
         List<State> stateList = null;
         try {
             stateList = stateService.findAll();
@@ -92,6 +95,7 @@ public class BaseInfo {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response state(@PathParam(PARAM_ID) int id) {
+        logger.info("Call state");
         State state = null;
         try {
             state = stateService.findById(id);

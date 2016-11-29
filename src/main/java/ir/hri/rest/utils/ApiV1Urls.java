@@ -3,7 +3,7 @@ package ir.hri.rest.utils;
 public class ApiV1Urls {
     public static final String ApiV1Root = "/v1";
 
-    public static final class BaseInfo {
+    public static final class BaseInfoPath {
         public static final String BASE_INFO = ApiV1Root + "/baseinfo";
 
         public static final String PATH_CITIES = "/cities";
@@ -15,5 +15,15 @@ public class ApiV1Urls {
         public static final String PARAM_ID = "id";
         public static final String PARAM_STATE_ID = "stateId";
 
+    }
+
+    public static final class UserManagementPath {
+        public static final String USER_MANAGE = ApiV1Root + "/usermanage";
+
+        public static final String PATH_USERS = "/users";
+        public static final String PATH_USER_USERNAME = "/user/{username}";
+        public static final String PATH_INSERT = "/insert";
+
+        public static final String PARAM_USERNAME = "username";
     }
 }

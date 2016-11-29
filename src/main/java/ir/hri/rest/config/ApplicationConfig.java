@@ -1,42 +1,20 @@
 package ir.hri.rest.config;
 
-import ir.hri.rest.controller.BaseInfo;
 import org.apache.log4j.Logger;
+import org.glassfish.jersey.server.ResourceConfig;
 
-import javax.ws.rs.core.Application;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
-public class ApplicationConfig extends Application {
+public class ApplicationConfig extends ResourceConfig {
     final static Logger logger = Logger.getLogger(ApplicationConfig.class);
 
-    @Override
-    public Set<Class<?>> getClasses() {
-        Set<Class<?>> resources = new java.util.HashSet<>();
+    public ApplicationConfig() {
         logger.info("REST configuration starting: getClasses()");
 
-        resources.add(org.glassfish.jersey.moxy.json.MoxyJsonFeature.class);
-        resources.add(JsonMoxyConfigurationContextResolver.class);
-        resources.add(CustomWadlGeneratorConfig.class);
-        resources.add(BaseInfo.class);
+        packages("ir.hri.rest.controller");
+        register(org.glassfish.jersey.moxy.json.MoxyJsonFeature.class);
+        register(JsonMoxyConfigurationContextResolver.class);
+        register(CustomWadlGeneratorConfig.class);
+        property("jersey.config.server.wadl.disableWadl", false);
 
         logger.info("REST configuration ended successfully.");
-        return resources;
-    }
-
-    @Override
-    public Set<Object> getSingletons() {
-        return Collections.emptySet();
-    }
-
-    @Override
-    public Map<String, Object> getProperties() {
-        Map<String, Object> properties = new HashMap<>();
-
-        properties.put("jersey.config.server.wadl.disableWadl", false);
-
-        return properties;
     }
 }
