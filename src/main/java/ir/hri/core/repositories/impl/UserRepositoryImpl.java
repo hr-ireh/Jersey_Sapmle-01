@@ -34,6 +34,7 @@ public class UserRepositoryImpl implements UserRepository {
         entityManager.getTransaction().begin();
         entityManager.persist(user);
         entityManager.getTransaction().commit();
+        entityManager.refresh(user);
     }
 
     @Override

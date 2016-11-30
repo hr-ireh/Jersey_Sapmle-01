@@ -3,10 +3,7 @@ package ir.hri.core.entities;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
@@ -15,19 +12,23 @@ public class User {
     @NotEmpty(message = "لطفا نام کاربری را وارد نمایید")
     @Length(min = 6, max = 30, message = "نام کاربری باید بین شش تا سی کاراکتر باشد")
     @Column(name = "USERNAME")
-    String username;
+    private String username;
 
     @NotEmpty(message = "لطفا نام را وارد نمایید")
     @Column(name = "FIRST_NAME", length = 50, nullable = false)
-    String firstName;
+    private String firstName;
 
     @NotEmpty(message = "لطفا نام خانوادگی را وارد نمایید")
     @Column(name = "LAST_NAME", length = 50, nullable = false)
-    String lastName;
+    private String lastName;
 
     @NotEmpty(message = "لطفا کلمه عبور را وارد نمایید")
     @Column(name = "PASSWORD", length = 30, nullable = false)
-    String password;
+    private String password;
+
+    @OneToOne
+    @JoinColumn(name = "CITY_ID", updatable = false)
+    private City city;
 
     public User() {
     }
@@ -71,6 +72,14 @@ public class User {
         this.password = password;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,7 +90,9 @@ public class User {
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
-        return !(password != null ? !password.equals(user.password) : user.password != null);
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        return !(city != null ? !city.equals(user.city) : user.city != null);
+
     }
 
     @Override
@@ -90,16 +101,7 @@ public class User {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }

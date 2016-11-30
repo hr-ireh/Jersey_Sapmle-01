@@ -20,6 +20,9 @@ public class UserResource {
     @XmlElement
     String password;
 
+    @XmlElement
+    int cityId;
+
     public UserResource() {
     }
 
@@ -62,6 +65,14 @@ public class UserResource {
         this.password = password;
     }
 
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,6 +80,7 @@ public class UserResource {
 
         UserResource that = (UserResource) o;
 
+        if (cityId != that.cityId) return false;
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
@@ -82,6 +94,7 @@ public class UserResource {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + cityId;
         return result;
     }
 
@@ -92,6 +105,7 @@ public class UserResource {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
+                ", cityId=" + cityId +
                 '}';
     }
 }
