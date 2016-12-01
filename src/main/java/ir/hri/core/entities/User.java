@@ -4,10 +4,11 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "USER")
-public class User {
+public class User implements Serializable {
     @Id
     @NotEmpty(message = "لطفا نام کاربری را وارد نمایید")
     @Length(min = 6, max = 30, message = "نام کاربری باید بین شش تا سی کاراکتر باشد")

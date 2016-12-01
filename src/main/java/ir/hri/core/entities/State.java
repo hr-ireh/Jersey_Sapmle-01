@@ -1,19 +1,14 @@
 package ir.hri.core.entities;
 
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.Cache;
-
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "STATE")
 //@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "cache1")
-public class State {
+public class State implements Serializable {
     @Id
     @Column(name = "ID")
     int id;

@@ -4,11 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "CITY")
 //@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "cache1")
-public class City {
+public class City implements Serializable {
     @Id
     @Column(name = "ID")
     int id;

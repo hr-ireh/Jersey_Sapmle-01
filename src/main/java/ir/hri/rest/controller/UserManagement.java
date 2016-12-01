@@ -1,19 +1,18 @@
 package ir.hri.rest.controller;
 
 
+import ir.hri.aspect.annotation.Loggable;
 import ir.hri.core.entities.User;
 import ir.hri.core.services.UserService;
 import ir.hri.rest.resources.UserResource;
 import ir.hri.rest.resources.UsersResource;
 import ir.hri.rest.resources.asm.UserResourceAsm;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import java.util.List;
 
 import static ir.hri.rest.utils.ApiV1Urls.UserManagementPath.*;
@@ -26,17 +25,14 @@ public class UserManagement {
     @Autowired
     UserService userService;
 
-    private static final Logger logger = Logger.getLogger(UserManagement.class);
-
     @GET
     @Path(PATH_USER_USERNAME)
+    @Loggable
     public Response user(@PathParam(PARAM_USERNAME) String username) {
-        logger.info("call user");
         User user;
         try {
             user = userService.findByUsername(username);
         } catch (Exception e) {
-            e.printStackTrace();
             return Response.serverError().build();
         }
         return Response.ok().entity(user).build();
@@ -44,13 +40,12 @@ public class UserManagement {
 
     @GET
     @Path(PATH_USERS)
+    @Loggable(description = "UserManagement.users")
     public Response users() {
-        logger.info("call users");
         List<User> userList = null;
         try {
             userList = userService.findAll();
         } catch (Exception e) {
-            e.printStackTrace();
             return Response.serverError().build();
         }
         return Response.ok().entity(new UsersResource(userList)).build();
@@ -58,18 +53,14 @@ public class UserManagement {
 
     @POST
     @Path(PATH_INSERT)
+    @Loggable
     public Response insert(UserResource userResource) {
-        logger.info("Call insert: " + userResource.toString());
         User user = UserResourceAsm.unresource(userResource);
         try {
-            logger.info("insert: " + user.toString());
             userService.insert(user);
         } catch (Exception e) {
-            e.printStackTrace();
             return Response.serverError().build();
         }
         return Response.ok().build();
     }
-
-
 }

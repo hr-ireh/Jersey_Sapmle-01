@@ -1,5 +1,6 @@
 package ir.hri.core.repositories.impl;
 
+import ir.hri.aspect.annotation.Loggable;
 import ir.hri.core.entities.User;
 import ir.hri.core.repositories.UserRepository;
 import ir.hri.core.util.JPAUtility;
@@ -30,11 +31,20 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    @Loggable(description = "UserRepositoryImpl.insert")
     public void insert(User user) throws Exception {
-        entityManager.getTransaction().begin();
-        entityManager.persist(user);
-        entityManager.getTransaction().commit();
-        entityManager.refresh(user);
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(user);
+            entityManager.getTransaction().commit();
+            entityManager.refresh(user);
+        } catch (Exception e) {
+            if (entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().rollback();
+            }
+            entityManager.clear();
+            throw e;
+        }
     }
 
     @Override

@@ -24,6 +24,7 @@
     <properties>
         <jersey.version>2.24</jersey.version>
         <jersey.scope>compile</jersey.scope>
+        <aspectj.version>1.8.9</aspectj.version>
         <spring.version>4.3.2.RELEASE</spring.version>
         <junit.version>4.12</junit.version>
         <hibernate.core.version>4.3.5.Final</hibernate.core.version>
@@ -190,6 +191,19 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ AspectJ ~~~~~~~~~~~~~~~~~ -->
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
         </dependency>
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Other ~~~~~~~~~~~~~~~~~~~ -->
         <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
