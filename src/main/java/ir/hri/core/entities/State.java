@@ -16,7 +16,7 @@ public class State implements Serializable {
     @Column(name = "NAME", length = 50, nullable = false)
     String name;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "STATE_ID")
     List<City> cities = new ArrayList<City>();
 
@@ -62,7 +62,6 @@ public class State implements Serializable {
         if (id != state.id) return false;
         if (name != null ? !name.equals(state.name) : state.name != null) return false;
         return !(cities != null ? !cities.equals(state.cities) : state.cities != null);
-
     }
 
     @Override

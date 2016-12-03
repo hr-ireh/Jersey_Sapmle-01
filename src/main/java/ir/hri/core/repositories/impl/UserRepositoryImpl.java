@@ -3,17 +3,18 @@ package ir.hri.core.repositories.impl;
 import ir.hri.aspect.annotation.Loggable;
 import ir.hri.core.entities.User;
 import ir.hri.core.repositories.UserRepository;
-import ir.hri.core.util.JPAUtility;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
-    EntityManager entityManager =
-            JPAUtility.getEntityManager();
+
+    @PersistenceContext(unitName = "entityManagerFactory")
+    EntityManager entityManager;
 
     @Override
     public User findByUsername(String username) throws Exception {
