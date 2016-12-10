@@ -1,6 +1,7 @@
 package ir.hri.rest.config;
 
 import org.apache.log4j.Logger;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 public class ApplicationConfig extends ResourceConfig {
@@ -13,6 +14,11 @@ public class ApplicationConfig extends ResourceConfig {
         register(org.glassfish.jersey.moxy.json.MoxyJsonFeature.class);
         register(JsonMoxyConfigurationContextResolver.class);
         register(CustomWadlGeneratorConfig.class);
+        register(MultiPartFeature.class);
+
+        //register(LoggingFilter.class);
+        //register(AuthenticationFilter.class);
+
         property("jersey.config.server.wadl.disableWadl", false);
 
         logger.info("REST configuration ended successfully.");

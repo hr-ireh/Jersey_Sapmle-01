@@ -26,4 +26,13 @@ public class ApiV1Urls {
 
         public static final String PARAM_USERNAME = "username";
     }
+
+    public static final class SendAndReceiveFilePath {
+        public static final String FILE = ApiV1Root + "/file";
+
+        public static final String PATH_UPLOAD = "/upload";
+        public static final String PATH_DOWNLOAD = "/download/{filename}";
+
+        public static final String PARAM_FILE_NAME = "filename";
+    }
 }
