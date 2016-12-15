@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -37,7 +38,8 @@ public class BaseInfo {
         } catch (Exception e) {
             return Response.serverError().build();
         }
-        return Response.ok().entity(new CitiesResource(cityList)).build();
+        NewCookie newCookie = new javax.ws.rs.core.NewCookie("c1", "123");
+        return Response.ok().cookie(newCookie).entity(new CitiesResource(cityList)).build();
     }
 
     @GET

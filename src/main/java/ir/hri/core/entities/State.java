@@ -1,5 +1,8 @@
 package ir.hri.core.entities;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,7 +10,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "STATE")
-//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "cache1")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "cache1")
 public class State implements Serializable {
     @Id
     @Column(name = "ID")
@@ -17,7 +21,7 @@ public class State implements Serializable {
     String name;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "STATE_ID")
+    @JoinColumn(name = "STATE_ID", foreignKey = @ForeignKey(name = "STATE_ID_FK"))
     List<City> cities = new ArrayList<City>();
 
     public State() {

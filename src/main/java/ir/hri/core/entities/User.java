@@ -1,13 +1,19 @@
 package ir.hri.core.entities;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "USER")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "cache1")
 public class User implements Serializable {
     @Id
     @NotEmpty(message = "لطفا نام کاربری را وارد نمایید")

@@ -18,6 +18,7 @@ public class CityRepositoryImpl implements CityRepository {
     @Override
     public City findById(int id) throws Exception {
         Query query = entityManager.createQuery("select t from City t where t.id = :id");
+        query.setHint("org.hibernate.cacheable", Boolean.TRUE);
         query.setParameter("id", Integer.valueOf(id));
         City city = (City) query.getSingleResult();
         return city;
@@ -26,6 +27,7 @@ public class CityRepositoryImpl implements CityRepository {
     @Override
     public List<City> findAll() throws Exception {
         Query query = entityManager.createQuery("select t from City t");
+        query.setHint("org.hibernate.cacheable", Boolean.TRUE);
         List<City> cityList = query.getResultList();
         return cityList;
     }
@@ -33,6 +35,7 @@ public class CityRepositoryImpl implements CityRepository {
     @Override
     public List<City> findByStateId(int stateId) throws Exception {
         Query query = entityManager.createQuery("select t from City t where t.stateId = :stateId");
+        query.setHint("org.hibernate.cacheable", Boolean.TRUE);
         query.setParameter("stateId", Integer.valueOf(stateId));
         List<City> cityList = query.getResultList();
         return cityList;
